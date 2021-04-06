@@ -39,6 +39,9 @@ namespace PersonApi4.Services
 
             services.AddSingleton<IBusinessObject<ViewFormattedPerson>, BusinessObject<ViewFormattedPerson>>();
             services.AddSingleton<IStorageProvider<ViewFormattedPerson>, StorageProvider<ViewFormattedPerson>>();
+
+            services.AddSingleton<IBusinessObject<IdentityType>, BusinessObject<IdentityType>>();
+            services.AddSingleton<IStorageProvider<IdentityType>, StorageProvider<IdentityType>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
