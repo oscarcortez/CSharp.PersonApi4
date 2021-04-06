@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PersonApi4.Controllers\PersonApi4.Controllers.csproj" />
+    <ProjectReference Include="..\PersonApi4.DataAccess\PersonApi4.DataAccess.csproj" />
     <ProjectReference Include="..\PersonApi4.Models\PersonApi4.Models.csproj" />
   </ItemGroup>
 

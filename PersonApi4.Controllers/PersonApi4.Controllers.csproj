@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PersonApi4.Models\PersonApi4.Models.csproj" />
+    <ProjectReference Include="..\PersonApi4.Toolkit\PersonApi4.Toolkit.csproj" />
   </ItemGroup>
 
 </Project>

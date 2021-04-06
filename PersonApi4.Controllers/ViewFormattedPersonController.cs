@@ -6,8 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using PersonApi4.Models;
-using PersonApi4.Models.Contexts;
-using Newtonsoft.Json;
+using PersonApi4.Toolkit;
 
 namespace PersonApi4.Controllers
 {
@@ -15,17 +14,17 @@ namespace PersonApi4.Controllers
     [Route("[controller]")]
     public class ViewFormattedPersonController : ControllerBase
     {
+        private IBusinessObject<ViewFormattedPerson> _businessObject;
+
+        public ViewFormattedPersonController(IBusinessObject<ViewFormattedPerson> businessObject)
+        {
+            _businessObject = businessObject;
+        }
 
         [HttpGet]
-        public string Get()
-        {
-            string result = default;
-            using (var context = new PersonDBContext())
-            {
-                // result = JsonConvert.SerializeObject(context.ViewFormattedPeople.FromSql(storeProcedure).ToList());
-                result = JsonConvert.SerializeObject(context.ViewFormattedPeople.ToList());
-            }
-            return result;
+        public IQueryable Get()
+        {            
+            return _businessObject.Query;
         }
     }
 }

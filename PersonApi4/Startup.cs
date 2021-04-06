@@ -8,6 +8,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using PersonApi4.Controllers;
+using PersonApi4.DataAccess;
+using PersonApi4.Models;
+using PersonApi4.Toolkit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +36,9 @@ namespace PersonApi4.Services
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PersonApi4", Version = "v1" });
             });
+
+            services.AddSingleton<IBusinessObject<ViewFormattedPerson>, BusinessObject<ViewFormattedPerson>>();
+            services.AddSingleton<IStorageProvider<ViewFormattedPerson>, StorageProvider<ViewFormattedPerson>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
