@@ -37,11 +37,28 @@ namespace PersonApi4.Services
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PersonApi4", Version = "v1" });
             });
 
-            services.AddSingleton<IBusinessObject<ViewFormattedPerson>, BusinessObject<ViewFormattedPerson>>();
-            services.AddSingleton<IStorageProvider<ViewFormattedPerson>, StorageProvider<ViewFormattedPerson>>();
+            SetupMethods("ConfigureServices", services);
+        }
 
-            services.AddSingleton<IBusinessObject<IdentityType>, BusinessObject<IdentityType>>();
-            services.AddSingleton<IStorageProvider<IdentityType>, StorageProvider<IdentityType>>();
+        public void SetupMethods(string methodName, object anyObject)
+        {
+            var setupMethods = from assemblies in AppDomain.CurrentDomain.GetAssemblies()
+                               from instanceTypes in assemblies.GetTypes()
+                               from methods in instanceTypes.GetMethods()
+                               where methods.Name == methodName
+                               select methods;
+
+            foreach (var currentMethod in setupMethods)
+            {
+                try
+                {
+                    currentMethod.Invoke(currentMethod.GetType(), new object[] { anyObject });
+                }
+                catch
+                {
+                    //throw new Exception("The method name is incorrect when it tries load by reflection");
+                }
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
