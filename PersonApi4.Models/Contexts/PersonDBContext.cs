@@ -24,6 +24,7 @@ namespace PersonApi4.Models.Contexts
         public virtual DbSet<Person> People { get; set; }
         public virtual DbSet<PersonBirthdate> PersonBirthdates { get; set; }
         public virtual DbSet<PersonIdentityValue> PersonIdentityValues { get; set; }
+        public virtual DbSet<Rol> Rols { get; set; }
         public virtual DbSet<ViewFormattedPerson> ViewFormattedPeople { get; set; }
         public virtual DbSet<VwFormattedPerson> VwFormattedPeople { get; set; }
 
@@ -176,6 +177,39 @@ namespace PersonApi4.Models.Contexts
                     .HasForeignKey(d => d.PersonId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("person_identity_value_fk");
+            });
+
+            modelBuilder.Entity<Rol>(entity =>
+            {
+                entity.ToTable("rol");
+
+                entity.HasIndex(e => e.Name, "rol_name_IDX")
+                    .IsUnique();
+
+                entity.Property(e => e.RolId).HasColumnName("rol_id");
+
+                entity.Property(e => e.CreatedAt)
+                    .HasColumnName("created_at")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.CreatedBy)
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("created_by")
+                    .HasDefaultValueSql("(user_name())");
+
+                entity.Property(e => e.Description)
+                    .HasColumnType("text")
+                    .HasColumnName("description");
+
+                entity.Property(e => e.IsActive)
+                    .HasColumnName("is_active")
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(55)
+                    .IsUnicode(false)
+                    .HasColumnName("name");
             });
 
             modelBuilder.Entity<ViewFormattedPerson>(entity =>
