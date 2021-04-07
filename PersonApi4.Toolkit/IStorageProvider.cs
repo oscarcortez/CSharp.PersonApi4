@@ -23,7 +23,7 @@
         /// The Get
         /// </summary>
         /// <returns>The <see cref="IQueryable{StorageType}"/></returns>
-        IQueryable<StorageType> Get();
+        Task<IQueryable<StorageType>> Get();
 
         string Get(string storeProcedure);
     }

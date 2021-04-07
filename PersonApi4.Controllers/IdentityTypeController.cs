@@ -24,9 +24,9 @@ namespace PersonApi4.Controllers
         }
 
         [HttpGet]
-        public IQueryable Get()
+        public async Task<IActionResult> Get()
         {
-            return _businessObject.Query;
+            return Ok(await _businessObject.Query);
         }
     }
 }

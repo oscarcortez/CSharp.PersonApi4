@@ -20,12 +20,12 @@
             return property.GetValue(source, null);
         }
 
-        public IQueryable<GenericModel> Get()
+        public async Task<IQueryable<GenericModel>> Get()
         {
             List<GenericModel> result = new();
-            using (PersonDBContext context = new ())
+            using (PersonDBContext context = new())
             {
-                result = context.Set<GenericModel>().ToList();
+                result = await context.Set<GenericModel>().ToListAsync();
             }
             return result.AsQueryable();
         }

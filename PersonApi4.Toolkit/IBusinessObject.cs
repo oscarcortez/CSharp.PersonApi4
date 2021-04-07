@@ -14,7 +14,7 @@
 
         Task Delete(ModelType model);
 
-        IQueryable<ModelType> Query { get; }
+        Task<IQueryable<ModelType>> Query { get; }
 
         IQueryable<ModelType> GetSpQuery(string storeProcedure);
 

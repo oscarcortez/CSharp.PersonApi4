@@ -10,7 +10,7 @@
     {
         private IStorageProvider<ModelType> storageProvider;
 
-        public IQueryable<ModelType> Query => this.storageProvider.Get().AsQueryable();
+        public Task<IQueryable<ModelType>> Query => storageProvider.Get();
 
         public IQueryable<ModelType> GetSpQuery(string storeProcedure)
         {
