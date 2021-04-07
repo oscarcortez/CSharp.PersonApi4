@@ -19,6 +19,9 @@ namespace PersonApi4.Services
 
             services.AddSingleton<IBusinessObject<IdentityType>, BusinessObject<IdentityType>>();
             services.AddSingleton<IStorageProvider<IdentityType>, StorageProvider<IdentityType>>();
+
+            services.AddSingleton<IBusinessObject<Rol>, BusinessObject<Rol>>();
+            services.AddSingleton<IStorageProvider<Rol>, StorageProvider<Rol>>();
         }
     }
 }
